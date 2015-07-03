@@ -1,1 +1,14 @@
-%h1 Micro StackOverflow へようこそ！
+.container
+  .jumbotron
+    %h1 Micro StackOverflow
+    %p
+      StackOverflowコピーアプリへようこそ！
+      質問を投稿したり、回答したりするにはユーザー登録が必要です。
+    %p 初めての方はサインアップしてください。
+
+    = link_to "Sign up", new_user_registration_path, class: "btn btn-primary btn-lg"
+    %p
+      %div
+        既にユーザー登録済みの場合は、
+        = link_to "こちらからログイン", new_user_session_path
+        してください。
