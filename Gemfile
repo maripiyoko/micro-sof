@@ -17,6 +17,8 @@ gem 'twitter-bootswatch-rails'
 gem 'twitter-bootswatch-rails-helpers'
 gem 'less-rails'
 
+gem 'devise'
+gem 'mandrill-api'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
@@ -39,11 +41,17 @@ group :development, :test do
   gem 'pry-byebug'
   gem 'annotate'
 
+  # mail テスト用
+  gem 'dotenv-rails'
+  gem 'letter_opener'
+
   # testing
   gem 'rspec'
   gem 'rspec-rails'
   gem 'factory_girl_rails'
   gem 'guard'
   gem 'guard-rspec'
+
+  gem 'erb2haml'
 end
 
