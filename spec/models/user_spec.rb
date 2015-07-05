@@ -1,5 +1,9 @@
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+
+  it "有効なファクトリを持つこと" do
+    expect(FactoryGirl.create(:user)).to be_valid
+  end
+
 end

@@ -1,8 +1,9 @@
 FactoryGirl.define do
+
   factory :question do
-    title "MyString"
-body "MyText"
-user nil
+    title { Faker::Lorem.sentence }
+    body { Faker::Lorem.paragraphs }
+    association :user
   end
 
 end
