@@ -1,5 +1,7 @@
 ## Micro StackOverflow
 
+![build status](https://circleci.com/gh/maripiyoko/micro-sof.png?circle-token=d7fe9c12038e85c7a19104dd0a19adb3283b5ac4)
+
 ### Rails練習用 StackOverflow コピーアプリ
 
 #### Ruby version
