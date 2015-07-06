@@ -6,7 +6,7 @@ RSpec.describe QuestionsController, type: :controller do
   # Question. As you add validations to Question, be sure to
   # adjust the attributes here as well.
   let(:valid_attributes) {
-    skip("Add a hash of attributes valid for your model")
+    FactoryGirl.attributes_for(:question)
   }
 
   let(:invalid_attributes) {
@@ -30,5 +30,20 @@ RSpec.describe QuestionsController, type: :controller do
       expect(assigns(questions)).to eq @questions
     end
   end
+
+  describe "POST #create" do
+    let(:user) { FactoryGirl.create(:user) }
+    before do
+      sign_in user
+    end
+    context "パラメータが正しい場合" do
+      it "新しい質問を作成する" do
+        expect {
+          post :create, { question: valid_attributes }, valid_session
+        }.to change(Question, :count).by(1)
+      end
+    end
+  end
+
 
 end
