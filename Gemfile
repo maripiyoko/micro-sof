@@ -17,6 +17,8 @@ gem 'twitter-bootswatch-rails'
 gem 'twitter-bootswatch-rails-helpers'
 gem 'less-rails'
 
+gem 'simple_form'
+
 gem 'devise'
 gem 'mandrill-api'
 
@@ -49,6 +51,7 @@ group :development, :test do
   gem 'rspec'
   gem 'rspec-rails'
   gem 'factory_girl_rails'
+  gem 'faker'
   gem 'guard'
   gem 'guard-rspec'
 
