@@ -1,6 +1,6 @@
-%h2 みんなの質問
+%h3 みんなの質問
 
-%table
+%table.table
   %thead
     %tr
       %th
@@ -10,7 +10,7 @@
   %tbody
     - @questions.each do |question|
       %tr
-        %td= link_to 'Show', question
+        %td= link_to "#{question.title}", question
         %td= link_to 'Edit', edit_question_path(question)
         %td= link_to 'Destroy', question, :method => :delete, :data => { :confirm => 'Are you sure?' }
 
