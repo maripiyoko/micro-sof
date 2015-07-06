@@ -39,7 +39,7 @@ RSpec.describe QuestionsController, type: :controller do
     context "パラメータが正しい場合" do
       it "新しい質問を作成する" do
         expect {
-          post :create, { question: valid_attributes }, valid_session
+          post :create, question: valid_attributes
         }.to change(Question, :count).by(1)
       end
     end

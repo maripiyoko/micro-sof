@@ -1,8 +1,8 @@
 FactoryGirl.define do
 
   factory :question do
-    title { Faker::Lorem.sentence }
-    body { Faker::Lorem.paragraphs }
+    title "Test Question"
+    body { Faker::Lorem.sentence }
     association :user
   end
 
