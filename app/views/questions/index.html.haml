@@ -10,9 +10,18 @@
   %tbody
     - @questions.each do |question|
       %tr
-        %td= link_to "#{question.title}", question
-        %td= link_to 'Edit', edit_question_path(question)
-        %td= link_to 'Destroy', question, :method => :delete, :data => { :confirm => 'Are you sure?' }
+        %td
+          .media
+            .media-left
+              icon
+            .media-body
+              .title
+                = link_to "#{question.title}", question
+              .body
+                = question.body
+        %td= link_to 'Edit', edit_question_path(question), class: "btn btn-sm"
+        %td= link_to 'Destroy', question, :method => :delete,
+          :data => { :confirm => 'Are you sure?' }, class: "btn btn-danger btn-sm"
 
 %br
 
