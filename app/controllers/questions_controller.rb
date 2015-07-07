@@ -1,6 +1,7 @@
 class QuestionsController < ApplicationController
   before_action :authenticate_user!, except: :index
-  before_action :set_question, only: [:show, :edit, :update, :destroy]
+  before_action :set_question, only: :show
+  before_action :set_own_question, only: [:edit, :update, :destroy]
 
   def index
     @questions = Question.all
@@ -54,6 +55,12 @@ class QuestionsController < ApplicationController
 
     def set_question
       @question = Question.find(params[:id])
+    end
+
+    def set_own_question
+      # ここで自分の質問じゃない場合例外発生する
+      # キャッチしてエラーメッセージ出したいんだが・・
+      @question = current_user.questions.find(params[:id])
     end
 
     def question_params
