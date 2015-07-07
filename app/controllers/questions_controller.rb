@@ -1,6 +1,6 @@
 class QuestionsController < ApplicationController
   before_action :authenticate_user!, except: :index
-  before_action :set_question, only: :show
+  before_action :set_question, only: [:show, :edit, :update, :destroy]
   before_action :set_own_question, only: [:edit, :update, :destroy]
 
   def index
@@ -58,9 +58,11 @@ class QuestionsController < ApplicationController
     end
 
     def set_own_question
-      # ここで自分の質問じゃない場合例外発生する
-      # キャッチしてエラーメッセージ出したいんだが・・
-      @question = current_user.questions.find(params[:id])
+      if @question.created_by?(current_user)
+        @question = current_user.questions.find(params[:id])
+      else
+        redirect_to questions_url, alert: 'Selected question is not editable.'
+      end
     end
 
     def question_params

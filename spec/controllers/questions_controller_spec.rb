@@ -45,5 +45,48 @@ RSpec.describe QuestionsController, type: :controller do
     end
   end
 
+  describe "GET #edit" do
+    let(:question) { FactoryGirl.create(:question) }
+
+    context "ログインしていない場合" do
+      it "編集画面が見れないこと" do
+        get :edit, {id: question.id}
+        expect(assigns(:question)).not_to eq question
+      end
+
+      it "編集画面ではなくサインイン画面にリダイレクトされること" do
+        get :edit, {id: question.id}
+        expect(response).to redirect_to('/users/sign_in')
+      end
+    end
+
+    context "ログインしている場合" do
+      let(:user) { FactoryGirl.create(:user) }
+      before do
+        sign_in user
+      end
+
+      context "自分の質問ならば" do
+        let(:my_question) { FactoryGirl.create(:question, user: user) }
+        it "編集出来るように表示されていること" do
+          get :edit, {id: my_question.id}
+          expect(assigns(:question)).to eq my_question
+        end
+
+        it "編集画面が表示されていること" do
+          get :edit, {id: my_question.id}
+          expect(response).to render_template("edit")
+        end
+      end
+
+      context "他の人の質問ならば" do
+        let(:other_question) { FactoryGirl.create(:question) }
+        it "質問一覧へリダイレクトされること" do
+          get :edit, {id: other_question.id}
+          expect(response).to redirect_to('/questions')
+        end
+      end
+    end
+  end
 
 end
