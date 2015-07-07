@@ -50,13 +50,13 @@ RSpec.describe QuestionsController, type: :controller do
 
     context "ログインしていない場合" do
       it "編集画面が見れないこと" do
-        get :edit, {id: question.id}
+        get :edit, { id: question.id }
         expect(assigns(:question)).not_to eq question
       end
 
       it "編集画面ではなくサインイン画面にリダイレクトされること" do
-        get :edit, {id: question.id}
-        expect(response).to redirect_to('/users/sign_in')
+        get :edit, { id: question.id }
+        expect(response).to redirect_to("/users/sign_in")
       end
     end
 
@@ -69,12 +69,12 @@ RSpec.describe QuestionsController, type: :controller do
       context "自分の質問ならば" do
         let(:my_question) { FactoryGirl.create(:question, user: user) }
         it "編集出来るように表示されていること" do
-          get :edit, {id: my_question.id}
+          get :edit, { id: my_question.id }
           expect(assigns(:question)).to eq my_question
         end
 
         it "編集画面が表示されていること" do
-          get :edit, {id: my_question.id}
+          get :edit, { id: my_question.id }
           expect(response).to render_template("edit")
         end
       end
@@ -82,8 +82,8 @@ RSpec.describe QuestionsController, type: :controller do
       context "他の人の質問ならば" do
         let(:other_question) { FactoryGirl.create(:question) }
         it "質問一覧へリダイレクトされること" do
-          get :edit, {id: other_question.id}
-          expect(response).to redirect_to('/questions')
+          get :edit, { id: other_question.id }
+          expect(response).to redirect_to("/questions")
         end
       end
     end
@@ -94,7 +94,7 @@ RSpec.describe QuestionsController, type: :controller do
 
     context "ログインしていない場合" do
       it "詳細画面が見れること" do
-        get :show, {id: question.id}
+        get :show, { id: question.id }
         expect(assigns(:question)).to eq question
       end
     end
@@ -104,8 +104,8 @@ RSpec.describe QuestionsController, type: :controller do
     context "ログインしていない場合" do
       let(:question) { FactoryGirl.create(:question) }
       it "サインイン画面にリダイレクトされること" do
-        put :update, {id: question.id, question: question.attributes }
-        expect(response).to redirect_to('/users/sign_in')
+        put :update, { id: question.id, question: question.attributes }
+        expect(response).to redirect_to("/users/sign_in")
       end
     end
 
@@ -127,7 +127,7 @@ RSpec.describe QuestionsController, type: :controller do
       it "他の人の質問ならば、質問一覧にリダイレクトされること" do
         other_question = FactoryGirl.create(:question)
         put :update, { id: other_question.id, question: other_question.attributes }
-        expect(response).to redirect_to('/questions')
+        expect(response).to redirect_to("/questions")
       end
     end
   end
@@ -136,8 +136,8 @@ RSpec.describe QuestionsController, type: :controller do
     context "ログインしていない場合" do
       let(:question) { FactoryGirl.create(:question) }
       it "サインイン画面にリダイレクトされること" do
-        delete :destroy, {id: question.id}
-        expect(response).to redirect_to('/users/sign_in')
+        delete :destroy, { id: question.id }
+        expect(response).to redirect_to("/users/sign_in")
       end
     end
 
@@ -151,13 +151,13 @@ RSpec.describe QuestionsController, type: :controller do
 
       it "自分の質問ならば、削除できること", skip: true do
         expect {
-          delete :destroy, {id: my_question.id}
+          delete :destroy, { id: my_question.id }
         }.to change(Question, :count).by(-1)
       end
 
       it "他の人の質問ならば、削除できないこと", skip: true do
         expect {
-          delete :destroy, {id: other_question.id}
+          delete :destroy, { id: other_question.id }
         }.not_to change(Question, :count)
       end
     end
