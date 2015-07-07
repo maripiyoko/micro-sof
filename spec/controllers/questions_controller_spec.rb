@@ -99,4 +99,36 @@ RSpec.describe QuestionsController, type: :controller do
       end
     end
   end
+
+  describe "PATCH #update" do
+    context "ログインしていない場合" do
+      let(:question) { FactoryGirl.create(:question) }
+      it "サインイン画面にリダイレクトされること" do
+        put :update, {id: question.id, question: question.attributes }
+        expect(response).to redirect_to('/users/sign_in')
+      end
+    end
+
+    context "ログインしている場合" do
+      let(:user) { FactoryGirl.create(:user) }
+      before do
+        sign_in user
+      end
+      let(:my_question) { FactoryGirl.create(:question, user: user) }
+
+      it "自分の質問ならば、更新出来ること" do
+        my_question.title = "EDITED TITLE"
+        put :update, { id: my_question.id, question: my_question.attributes }
+        expect(assigns(:question)).to eq my_question
+        my_question.reload
+        expect(my_question.title).to eq "EDITED TITLE"
+      end
+
+      it "他の人の質問ならば、質問一覧にリダイレクトされること" do
+        other_question = FactoryGirl.create(:question)
+        put :update, { id: other_question.id, question: other_question.attributes }
+        expect(response).to redirect_to('/questions')
+      end
+    end
+  end
 end
