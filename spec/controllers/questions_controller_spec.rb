@@ -89,4 +89,14 @@ RSpec.describe QuestionsController, type: :controller do
     end
   end
 
+  describe "GET #show" do
+    let(:question) { FactoryGirl.create(:question) }
+
+    context "ログインしていない場合" do
+      it "詳細画面が見れること" do
+        get :show, {id: question.id}
+        expect(assigns(:question)).to eq question
+      end
+    end
+  end
 end
