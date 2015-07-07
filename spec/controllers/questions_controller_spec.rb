@@ -131,4 +131,35 @@ RSpec.describe QuestionsController, type: :controller do
       end
     end
   end
+
+  describe "DELETE #destroy" do
+    context "ログインしていない場合" do
+      let(:question) { FactoryGirl.create(:question) }
+      it "サインイン画面にリダイレクトされること" do
+        delete :destroy, {id: question.id}
+        expect(response).to redirect_to('/users/sign_in')
+      end
+    end
+
+    context "ログインしている場合" do
+      let(:user) { FactoryGirl.create(:user) }
+      before do
+        sign_in user
+      end
+      let(:my_question) { FactoryGirl.create(:question, user: user) }
+      let(:other_question) { FactoryGirl.create(:question) }
+
+      it "自分の質問ならば、削除できること", skip: true do
+        expect {
+          delete :destroy, {id: my_question.id}
+        }.to change(Question, :count).by(-1)
+      end
+
+      it "他の人の質問ならば、削除できないこと", skip: true do
+        expect {
+          delete :destroy, {id: other_question.id}
+        }.not_to change(Question, :count)
+      end
+    end
+  end
 end
