@@ -3,7 +3,7 @@
 %p= @question.title
 .col-sm-12
   .col-sm-6
-    =textarea @question.body, class: "question form-control", maxlength: "10", :readnly
+    %pre=@question.body
 
 = link_to 'Edit', edit_question_path(@question)
 \|
