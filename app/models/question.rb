@@ -9,7 +9,7 @@ class Question < ActiveRecord::Base
 
   def summary
     if body && body.size > BODY_SUMMARY_LENGTH
-      body.slice(0..BODY_SUMMARY_LENGTH) + ".."
+      body.slice(0..BODY_SUMMARY_LENGTH) + '..'
     end
   end
 
