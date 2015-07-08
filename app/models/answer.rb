@@ -5,4 +5,8 @@ class Answer < ActiveRecord::Base
   validates :user, presence: true
   validates :question, presence: true
 
+  def created_by?(user)
+    return false unless user
+    self.user.id == user.id
+  end
 end

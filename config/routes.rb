@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
-  resources :questions
-  devise_for :users
   root 'home#index'
+  devise_for :users
+
+  resources :questions do
+    resources :answers, only: [ :create, :update, :destroy ]
+  end
 end
