@@ -1,9 +1,14 @@
 %p#notice= notice
 
+%h3 Question
+
 %p= @question.title
 .col-sm-12
   .col-sm-6
     %pre=@question.body
+
+= render 'answers/index'
+= render 'answers/new'
 
 = link_to 'Edit', edit_question_path(@question)
 \|
