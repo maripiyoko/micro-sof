@@ -1,8 +1,8 @@
 FactoryGirl.define do
   factory :answer do
-    comment "MyText"
-user nil
-question nil
+    comment { Faker::Lorem.sentence }
+    association :user
+    association :question
   end
 
 end
