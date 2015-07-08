@@ -8,8 +8,8 @@ class Question < ActiveRecord::Base
   BODY_SUMMARY_LENGTH = 50
 
   def summary
-    if self.body && self.body.size > BODY_SUMMARY_LENGTH
-      self.body.slice(0..BODY_SUMMARY_LENGTH) + ".."
+    if body && body.size > BODY_SUMMARY_LENGTH
+      body.slice(0..BODY_SUMMARY_LENGTH) + '..'
     end
   end
 
