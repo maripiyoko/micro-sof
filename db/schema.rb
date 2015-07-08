@@ -11,10 +11,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150708115617) do
+ActiveRecord::Schema.define(version: 20150708231723) do
 
   create_table "answers", force: :cascade do |t|
-    t.text     "comment",     limit: 65535
+    t.text     "body",        limit: 65535
     t.integer  "user_id",     limit: 4
     t.integer  "question_id", limit: 4
     t.datetime "created_at",                null: false
