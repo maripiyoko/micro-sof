@@ -146,16 +146,16 @@ RSpec.describe QuestionsController, type: :controller do
       before do
         sign_in user
       end
-      let(:my_question) { FactoryGirl.create(:question, user: user) }
-      let(:other_question) { FactoryGirl.create(:question) }
 
-      it "自分の質問ならば、削除できること", skip: true do
+      it "自分の質問ならば、削除できること" do
+        my_question = FactoryGirl.create(:question, user: user)
         expect {
           delete :destroy, { id: my_question.id }
         }.to change(Question, :count).by(-1)
       end
 
-      it "他の人の質問ならば、削除できないこと", skip: true do
+      it "他の人の質問ならば、削除できないこと" do
+        other_question = FactoryGirl.create(:question)
         expect {
           delete :destroy, { id: other_question.id }
         }.not_to change(Question, :count)

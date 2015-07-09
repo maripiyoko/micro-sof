@@ -1,0 +1,40 @@
+class VotesController < ApplicationController
+  before_action :authenticate_user!
+  before_action :set_target
+
+  def up
+    @target.increment(:score)
+    if @target.valid?
+      @target.save!
+      # ajaxではない場合、パスの指定がおかしいためエラーになる？？
+      render :show, status: :ok
+    else
+      render json: @target.errors, status: :unprocessable_entity
+    end
+  end
+
+  def down
+    @target.decrement(:score)
+    if @target.valid?
+      @target.save!
+      render :show, status: :ok
+    else
+      render json: @target.errors, status: :unprocessable_entity
+    end
+
+  end
+
+  private
+
+    def set_target
+      if params[:question_id]
+        # question_id がある場合、idはanswer
+        answer = Answer.find(params[:id])
+        @target = answer.votes.find_or_initialize_by(user_id: current_user.id)
+      else
+        question = Question.find(params[:id])
+        @target = question.votes.find_or_initialize_by(user_id: current_user.id)
+      end
+    end
+
+end
