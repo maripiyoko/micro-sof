@@ -15,7 +15,11 @@ class AnswersController < ApplicationController
   end
 
   def update
-
+    if @answer.update(answer_params)
+      redirect_to @question, notice: '回答を更新しました。'
+    else
+      redirect_to @question, alert: '回答が更新できませんでした。'
+    end
   end
 
   def destroy
@@ -29,7 +33,7 @@ class AnswersController < ApplicationController
     end
 
     def set_answer
-      @answer = @question.find(params[:id])
+      @answer = @question.answers.find(params[:id])
       unless (@answer.created_by?(current_user))
         redirect_to @question, alert: '自分の回答ではないので、操作できません。'
       end
