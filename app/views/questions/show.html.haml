@@ -3,7 +3,16 @@
 %h3= @question.title
 
 .col-sm-12
-  .col-sm-6
+  .col-sm-1
+    .btn-block
+      = link_to vote_up_question_path(@question), method: :post, remote: true do
+        %i{class: "glyphicon glyphicon-chevron-up"}
+    .btn-block
+      score
+    .btn-block
+      = link_to vote_down_question_path(@question), method: :delete, remote: true do
+        %i{class: "glyphicon glyphicon-chevron-down"}
+  .col-sm-5
     %pre=@question.body
     .row.col-sm-12
       = render partial: 'shared/qa_info', locals: { object: @question }
