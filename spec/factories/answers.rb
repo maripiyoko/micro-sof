@@ -12,7 +12,7 @@
 
 FactoryGirl.define do
   factory :answer do
-    comment { Faker::Lorem.sentence }
+    body { Faker::Lorem.sentence }
     association :user
     association :question
   end
