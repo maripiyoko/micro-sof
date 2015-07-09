@@ -6,10 +6,9 @@ class VotesController < ApplicationController
     @target.increment(:score)
     if @target.valid?
       @target.save!
-      # ajaxではない場合、パスの指定がおかしいためエラーになる？？
       render :show, status: :ok
     else
-      render json: @target.errors, status: :unprocessable_entity
+      render json: 'you are already voted.', status: :unprocessable_entity
     end
   end
 
@@ -19,7 +18,7 @@ class VotesController < ApplicationController
       @target.save!
       render :show, status: :ok
     else
-      render json: @target.errors, status: :unprocessable_entity
+      render json: 'you are already voted.', status: :unprocessable_entity
     end
 
   end
