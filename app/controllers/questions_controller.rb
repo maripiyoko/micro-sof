@@ -8,7 +8,9 @@ class QuestionsController < ApplicationController
   end
 
   def show
-    @answer = @question.answers.build
+    @answer = Answer.new
+    @answer.question_id = @question.id
+    @answer.user = current_user
   end
 
   def new
