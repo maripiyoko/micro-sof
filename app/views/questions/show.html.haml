@@ -1,10 +1,13 @@
 %p#notice= notice
 
-%p= @question.title
+%h3= @question.title
+
 .col-sm-12
   .col-sm-6
     %pre=@question.body
+    .row.col-sm-12
+      = render partial: 'shared/qa_info', locals: { object: @question }
 
-= link_to 'Edit', edit_question_path(@question)
-\|
-= link_to 'Back', questions_path
+= render 'answers/index'
+= render 'answers/new'
+
