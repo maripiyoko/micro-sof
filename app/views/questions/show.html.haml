@@ -1,8 +1,7 @@
 %p#notice= notice
 
-%h3 Question
+%h3= @question.title
 
-%p= @question.title
 .col-sm-12
   .col-sm-6
     %pre=@question.body

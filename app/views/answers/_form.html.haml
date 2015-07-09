@@ -1,0 +1,5 @@
+.col-sm-12
+  .col-sm-6
+    = simple_form_for [ @question, @answer ], html: { class: "form-horizontal" } do |f|
+      = f.input :body, input_html: { class: "form-control" }
+      = f.button :submit, class: "btn-primary"
