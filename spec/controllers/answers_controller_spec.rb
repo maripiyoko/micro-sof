@@ -46,4 +46,21 @@ RSpec.describe AnswersController, type: :controller do
     end
   end
 
+  describe "DELETE#destroy" do
+    before { sign_in login_user }
+
+    it "自分の回答ならば、削除出来ること" do
+      my_answer = FactoryGirl.create(:answer, user: login_user)
+      expect {
+        delete :destroy, { question_id: my_answer.question_id, id: my_answer.id }
+      }.to change(Answer, :count).by(-1)
+    end
+
+    it "自分の回答でないならば、削除できないこと" do
+      other_answer = FactoryGirl.create(:answer)
+      expect {
+        delete :destroy, { question_id: other_answer.question_id, id: other_answer.id }
+      }.not_to change(Answer, :count)
+    end
+  end
 end

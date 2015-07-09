@@ -23,7 +23,8 @@ class AnswersController < ApplicationController
   end
 
   def destroy
-
+    @answer.destroy
+    redirect_to @question, notice: '回答を削除しました。'
   end
 
   private
