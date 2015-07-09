@@ -5,6 +5,8 @@
 .col-sm-12
   .col-sm-6
     %pre=@question.body
+    .row.col-sm-12
+      = render partial: 'shared/qa_info', locals: { object: @question }
 
 = render 'answers/index'
 = render 'answers/new'

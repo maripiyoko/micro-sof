@@ -19,4 +19,5 @@
                       data: { confirm: 'Are you sure?' }, class: "btn btn-sm btn-danger"
               - else
                 = answer.body
-
+              .row.col-sm-12
+                = render partial: 'shared/qa_info', locals: { object: answer }
