@@ -1,1 +1,22 @@
 %h4="#{@question.answers.count}件の回答"
+
+%table.table
+  %tbody
+    - @question.answers.each do |answer|
+      %tr
+        %td
+          .media
+            .media-left
+              icon
+            .media-body
+              - if answer.created_by?(current_user)
+                .form-horizontal
+                  = form_for [ @question, answer ] do |f|
+                    .col-sm-11
+                      = f.text_area :body, { class: "form-control", rows: "5" }
+                    = f.button '更新', class: "btn btn-success btn-sm"
+                    = link_to '削除', [ @question, answer ], method: :delete,
+                      data: { confirm: 'Are you sure?' }, class: "btn btn-sm btn-danger"
+              - else
+                = answer.body
+
