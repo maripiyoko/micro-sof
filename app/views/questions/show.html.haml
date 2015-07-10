@@ -6,12 +6,12 @@
   .col-sm-1
     .btn-block
       = link_to vote_up_question_path(@question), method: :post, remote: true do
-        %i{class: "js-vote-count glyphicon glyphicon-chevron-up"}
+        %i{class: "js-vote-count vote-arrow-style glyphicon glyphicon-chevron-up"}
     .btn-block
-      score
+      %span{class: "badge js-vote-score"}0
     .btn-block
       = link_to vote_down_question_path(@question), method: :delete, remote: true do
-        %i{class: "js-vote-count glyphicon glyphicon-chevron-down"}
+        %i{class: "js-vote-count vote-arrow-style glyphicon glyphicon-chevron-down"}
   .col-sm-5
     %pre=@question.body
     .row.col-sm-12
