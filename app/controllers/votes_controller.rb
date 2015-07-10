@@ -6,7 +6,7 @@ class VotesController < ApplicationController
     @target.increment(:score)
     if @target.valid?
       @target.save!
-      render :show, status: :ok
+      render json: @target.votable.sum_votes
     else
       render json: 'you are already voted.', status: :unprocessable_entity
     end
@@ -16,7 +16,7 @@ class VotesController < ApplicationController
     @target.decrement(:score)
     if @target.valid?
       @target.save!
-      render :show, status: :ok
+      render json: @target.votable.sum_votes
     else
       render json: 'you are already voted.', status: :unprocessable_entity
     end
