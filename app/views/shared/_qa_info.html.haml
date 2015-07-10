@@ -1,8 +1,8 @@
 .qa_info.pull-right
   .qa_info_date
-    - if object.created_at != object.updated_at
-      = "更新日：#{object.updated_at}"
+    - if item.created_at != item.updated_at
+      = "更新日：#{item.updated_at}"
     - else
-      = "作成日：#{object.created_at}"
+      = "作成日：#{item.created_at}"
   .qa_info_user
-    = "#{object.user.email} さん"
+    = "#{item.user.email} さん"
