@@ -9,8 +9,12 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :questions, concerns: :voting do
-    resources :answers, concerns: :voting, only: [ :create, :update, :destroy ]
+  concern :commentable do
+    resources :comments, only: [ :create, :update, :destroy ]
+  end
+
+  resources :questions, concerns: [ :voting, :commentable ] do
+    resources :answers, concerns: [ :voting, :commentable ], only: [ :create, :update, :destroy ]
   end
 
 end
