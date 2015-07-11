@@ -7,14 +7,14 @@
         %td
           .media
             .media-left
-              .btn-block
+              .btn-block.js-vote-count
                 = link_to vote_up_question_answer_path(@question, answer), method: :post, remote: true do
-                  %i{class: "glyphicon glyphicon-chevron-up"}
-              .btn-block
-                score
-              .btn-block
+                  %i{class: "vote-arrow-style glyphicon glyphicon-chevron-up"}
+              .btn-block.js-vote-score
+                %span{class: "badge vote-score-style"}=answer.sum_votes
+              .btn-block.js-vote-count
                 = link_to vote_down_question_answer_path(@question, answer), method: :delete, remote: true do
-                  %i{class: "glyphicon glyphicon-chevron-down"}
+                  %i{class: "vote-arrow-style glyphicon glyphicon-chevron-down"}
             .media-body
               - if answer.created_by?(current_user)
                 .form-horizontal
@@ -27,4 +27,4 @@
               - else
                 = answer.body
               .row.col-sm-12
-                = render partial: 'shared/qa_info', locals: { object: answer }
+                = render partial: 'shared/qa_info', locals: { item: answer }

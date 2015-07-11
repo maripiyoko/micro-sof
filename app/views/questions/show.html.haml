@@ -4,18 +4,18 @@
 
 .col-sm-12
   .col-sm-1
-    .btn-block
+    .btn-block.js-vote-count
       = link_to vote_up_question_path(@question), method: :post, remote: true do
-        %i{class: "glyphicon glyphicon-chevron-up"}
-    .btn-block
-      score
-    .btn-block
+        %i{class: "vote-arrow-style glyphicon glyphicon-chevron-up"}
+    .btn-block.js-vote-score
+      %span{class: "badge "}=@question.sum_votes
+    .btn-block.js-vote-count
       = link_to vote_down_question_path(@question), method: :delete, remote: true do
-        %i{class: "glyphicon glyphicon-chevron-down"}
+        %i{class: "vote-arrow-style glyphicon glyphicon-chevron-down"}
   .col-sm-5
     %pre=@question.body
     .row.col-sm-12
-      = render partial: 'shared/qa_info', locals: { object: @question }
+      = render partial: 'shared/qa_info', locals: { item: @question }
 
 = render 'answers/index'
 = render 'answers/new'
