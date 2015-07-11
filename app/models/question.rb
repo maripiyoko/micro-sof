@@ -8,11 +8,10 @@
 #  user_id    :integer
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
+#  sum_votes  :integer          default(0)
 #
 
 class Question < ActiveRecord::Base
-  include Votable
-
   belongs_to :user
   has_many :answers
   has_many :votes, as: :votable

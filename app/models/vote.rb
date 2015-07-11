@@ -18,4 +18,13 @@ class Vote < ActiveRecord::Base
   validates :user, presence: true
   validates :user_id, uniqueness: { scope: [ :votable_id, :votable_type ] }
   validates :score, inclusion: { in: -1..1 }
+
+  after_save :update_sum_votes
+
+  private
+
+    def update_sum_votes
+      sum = Vote.where(votable_id: self.votable_id).sum(:score)
+      self.votable.update_attribute(:sum_votes, sum)
+    end
 end
