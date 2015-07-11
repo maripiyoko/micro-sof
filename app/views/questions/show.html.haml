@@ -4,14 +4,14 @@
 
 .col-sm-12
   .col-sm-1
-    .btn-block
+    .btn-block.js-vote-count
       = link_to vote_up_question_path(@question), method: :post, remote: true do
-        %i{class: "js-vote-count vote-arrow-style glyphicon glyphicon-chevron-up"}
-    .btn-block
-      %span{class: "badge js-vote-score"}0
-    .btn-block
+        %i{class: "vote-arrow-style glyphicon glyphicon-chevron-up"}
+    .btn-block.js-vote-score
+      %span{class: "badge "}=@question.sum_votes
+    .btn-block.js-vote-count
       = link_to vote_down_question_path(@question), method: :delete, remote: true do
-        %i{class: "js-vote-count vote-arrow-style glyphicon glyphicon-chevron-down"}
+        %i{class: "vote-arrow-style glyphicon glyphicon-chevron-down"}
   .col-sm-5
     %pre=@question.body
     .row.col-sm-12
