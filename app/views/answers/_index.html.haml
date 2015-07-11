@@ -2,7 +2,7 @@
 
 %table.table
   %tbody
-    - @question.answers.each do |answer|
+    - @question.answers.order(sum_votes: :desc).each do |answer|
       %tr
         %td
           .media
