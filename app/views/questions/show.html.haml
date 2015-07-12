@@ -4,13 +4,15 @@
 
 .col-sm-12
   .col-sm-1
+    -# answers/indexにも同じ様なところがあるパーシャルにしたいが
+    -# パスが違うのでどうしたら良いかわからない
     .btn-block.js-vote-count
-      = link_to vote_up_question_path(@question), method: :post, remote: true do
+      = link_to up_question_path(@question), method: :post, remote: true do
         %i{class: "vote-arrow-style glyphicon glyphicon-chevron-up"}
     .btn-block.js-vote-score
       %span{class: "badge "}=@question.sum_votes
     .btn-block.js-vote-count
-      = link_to vote_down_question_path(@question), method: :delete, remote: true do
+      = link_to down_question_path(@question), method: :delete, remote: true do
         %i{class: "vote-arrow-style glyphicon glyphicon-chevron-down"}
   .col-sm-5
     %pre=@question.body

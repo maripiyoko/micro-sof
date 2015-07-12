@@ -20,7 +20,6 @@ class VotesController < ApplicationController
     else
       render json: 'you are already voted.', status: :unprocessable_entity
     end
-
   end
 
   private
