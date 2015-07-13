@@ -5,17 +5,19 @@
     - @question.answers.order(sum_votes: :desc).each do |answer|
       %tr
         %td
-          .media
-            .media-left
+          .answer
+            -# questions/showにも同じ様なところがあるパーシャルにしたいが
+            -# パスが違うのでどうしたら良いかわからない
+            .col-sm-1
               .btn-block.js-vote-count
-                = link_to vote_up_question_answer_path(@question, answer), method: :post, remote: true do
+                = link_to up_question_answer_path(@question, answer), method: :post, remote: true do
                   %i{class: "vote-arrow-style glyphicon glyphicon-chevron-up"}
               .btn-block.js-vote-score
                 %span{class: "badge vote-score-style"}=answer.sum_votes
               .btn-block.js-vote-count
-                = link_to vote_down_question_answer_path(@question, answer), method: :delete, remote: true do
+                = link_to down_question_answer_path(@question, answer), method: :delete, remote: true do
                   %i{class: "vote-arrow-style glyphicon glyphicon-chevron-down"}
-            .media-body
+            .col-sm-11
               - if answer.created_by?(current_user)
                 .form-horizontal
                   = form_for [ @question, answer ] do |f|
@@ -27,4 +29,5 @@
               - else
                 = answer.body
               .row.col-sm-12
-                = render partial: 'shared/qa_info', locals: { item: answer }
+                = render 'shared/qa_info', { item: answer }
+              .row.col-sm-12

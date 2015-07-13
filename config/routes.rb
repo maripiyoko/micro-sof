@@ -4,13 +4,17 @@ Rails.application.routes.draw do
 
   concern :voting do
     member do
-      post 'vote_up', controller: :votes, action: :up
-      delete 'vote_down', controller: :votes, action: :down
+      post 'up', controller: :votes, action: :up
+      delete 'down', controller: :votes, action: :down
     end
   end
 
-  resources :questions, concerns: :voting do
-    resources :answers, concerns: :voting, only: [ :create, :update, :destroy ]
+  concern :commentable do
+    resources :comments
+  end
+
+  resources :questions, concerns: [ :voting, :commentable ] do
+    resources :answers, concerns: [ :voting, :commentable ], only: [ :create, :update, :destroy ]
   end
 
 end

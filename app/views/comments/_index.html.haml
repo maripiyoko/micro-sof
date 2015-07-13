@@ -1,0 +1,9 @@
+%div{id: "comment-#{parent.id}"}
+  %label コメント一覧
+  .row.col-sm-12
+    %ul{id: "comments"}
+      = render parent.comments
+  .row.col-sm-12
+    = link_to "コメントを追加する", new_question_comment_path(parent), remote: true
+  .row.col-sm-12
+    #create-new-comment
