@@ -4,6 +4,14 @@
     %ul{id: "comments"}
       = render parent.comments
   .row.col-sm-12
-    = link_to "コメントを追加する", new_question_comment_path(parent), remote: true
-  .row.col-sm-12
-    #create-new-comment
+    = link_to "コメントを追加する", new_question_comment_path(parent), remote: true, class: "btn btn-primary"
+
+.modal.fade{id: "comment-modal"}
+  .modal-dialog
+    .modal-content
+      .modal-header
+        %button.close{"area-hidden": true, "data-dismiss": "modal"} ×
+        %h4{class: "modal-title"}コメントを入力してください
+      .modal-body{id: "create-new-comment"}
+      .modal-footer
+        %button{class: "btn btn-default"}Close
