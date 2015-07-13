@@ -23,7 +23,9 @@ class CommentsController < ApplicationController
     respond_to do |format|
       if @comment.save
         format.html { redirect_to @parent }
-        format.js
+        format.js do
+          @comments = @parent.comments
+        end
       else
         format.js { render :new }
       end
