@@ -10,7 +10,7 @@ Rails.application.routes.draw do
   end
 
   concern :commentable do
-    resources :comments, only: [ :create, :update, :destroy ]
+    resources :comments
   end
 
   resources :questions, concerns: [ :voting, :commentable ] do

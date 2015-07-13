@@ -1,15 +1,31 @@
 class CommentsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_parent
-  before_action :set_comment, only: [ :update, :destroy ]
+  before_action :set_comment, only: [ :edit, :show, :update, :destroy ]
+
+  def new
+    @comment = Comment.new
+    respond_to do |format|
+      format.html
+      format.js
+    end
+  end
+
+  def edit
+  end
+
+  def show
+  end
 
   def create
     @comment = @parent.comments.build(comment_params)
+    @comment.user = current_user
     respond_to do |format|
       if @comment.save
-        format.json status: :ok
+        format.html { redirect_to @parent }
+        format.js
       else
-        format.json { render json: 'Cannot create comment', status: :unprocessable_entity }
+        format.js { render :new }
       end
     end
   end
@@ -17,9 +33,9 @@ class CommentsController < ApplicationController
   def update
     respond_to do |format|
       if @comment.update(comment_params)
-        format.json status: :ok
+        format.js
       else
-        format.json status: :unprocessable_entity
+        format.js { render :edit }
       end
     end
 
@@ -28,7 +44,7 @@ class CommentsController < ApplicationController
   def destroy
     @comment.destroy
     respond_to do |format|
-      format.json status: :ok
+      format.js
     end
   end
 
@@ -40,11 +56,11 @@ class CommentsController < ApplicationController
       else
         @parent = Question.find(params[:question_id])
       end
-
     end
 
     def set_comment
-        @comment = @parent.comments.where(user_id: current_user.id).find(params[:id])
+      binding.pry
+      @comment = @parent.comments.where(user_id: current_user.id).find(params[:id])
     end
 
     def comment_params
