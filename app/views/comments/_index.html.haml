@@ -1,8 +1,19 @@
 %div{id: "comment-#{parent.id}"}
   %label コメント一覧
   .row.col-sm-12
-    %ul{id: "comments"}
-      = render parent.comments
+    %table{id: "comments", class: "table table-condensed"}
+      - parent.comments.each do |comment|
+        %tr
+          - if comment.created_by?(current_user)
+            %td.comment-body
+              = link_to comment.body, edit_question_comment_path(parent, comment), remote: true
+            %td.comment-action.text-right
+              = link_to [ parent, comment ], method: :delete, remote: true do
+                %i.glyphicon.glyphicon-remove-sign
+          - else
+            %td.comment-body=comment.body
+            %td.comment-action.text-right
+
   .row.col-sm-12
     = link_to "コメントを追加する", new_question_comment_path(parent), remote: true, class: "btn btn-primary"
 
@@ -12,6 +23,6 @@
       .modal-header
         %button.close{"area-hidden": true, "data-dismiss": "modal"} ×
         %h4{class: "modal-title"}コメントを入力してください
-      .modal-body{id: "create-new-comment"}
+      .modal-body{id: "comment-modal-body"}
       .modal-footer
         %button{class: "btn btn-default"}Close
