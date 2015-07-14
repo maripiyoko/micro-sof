@@ -1,7 +1,7 @@
-%div{id: "comment-#{parent.id}"}
+%div
   %label コメント一覧
   .row.col-sm-12
-    %table{id: "comments", class: "table table-condensed"}
+    %table{id: "comments-#{parent.id}", class: "table table-condensed"}
       = render parent.comments, { parent: parent }
 
   .row.col-sm-12
