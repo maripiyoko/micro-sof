@@ -1,5 +1,7 @@
 - if user_signed_in?
   .container-fluid
     = "ようこそ！#{current_user.email}さん"
+    %p
+      = link_to "質問一覧へ", questions_path
 - else
   = render 'welcome'
