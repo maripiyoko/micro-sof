@@ -4,7 +4,7 @@ class QuestionsController < ApplicationController
   before_action :set_own_question, only: [:edit, :update, :destroy]
 
   def index
-    @questions = Question.all.page(params[:page])
+    @questions = Question.order(updated_at: :desc).page(params[:page])
   end
 
   def show
