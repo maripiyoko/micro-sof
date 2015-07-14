@@ -1,8 +1,8 @@
-.qa_info.pull-right
-  .qa_info_date
+.qa_info
+  %span.qa_info_date
     - if item.created_at != item.updated_at
       = "更新日：#{item.updated_at}"
     - else
       = "作成日：#{item.created_at}"
-  .qa_info_user
+  %span.qa_info_user
     = "#{item.user.email} さん"
