@@ -14,11 +14,11 @@ Rails.application.routes.draw do
   end
 
   resources :questions do
-    resources :comments
+    resources :comments, only: [ :new, :edit, :create, :update, :destroy ]
   end
 
   resources :answers do
-    resources :comments
+    resources :comments, only: [ :new, :edit, :create, :update, :destroy ]
   end
 
 end

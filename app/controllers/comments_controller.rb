@@ -13,9 +13,10 @@ class CommentsController < ApplicationController
   end
 
   def edit
-  end
-
-  def show
+    respond_to do |format|
+      format.html
+      format.js { render :new }
+    end
   end
 
   def create
