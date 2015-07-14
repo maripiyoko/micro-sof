@@ -1,1 +1,1 @@
-$('#comments').html("<%= j(render @comments); %>");
+$('#comments').html("<%= j(render @comments, { parent: @parent }); %>");

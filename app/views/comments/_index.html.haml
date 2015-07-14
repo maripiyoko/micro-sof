@@ -2,20 +2,10 @@
   %label コメント一覧
   .row.col-sm-12
     %table{id: "comments", class: "table table-condensed"}
-      - parent.comments.each do |comment|
-        %tr
-          - if comment.created_by?(current_user)
-            %td.comment-body
-              = link_to comment.body, edit_question_comment_path(parent, comment), remote: true
-            %td.comment-action.text-right
-              = link_to [ parent, comment ], method: :delete, remote: true do
-                %i.glyphicon.glyphicon-remove-sign
-          - else
-            %td.comment-body=comment.body
-            %td.comment-action.text-right
+      = render parent.comments, { parent: parent }
 
   .row.col-sm-12
-    = link_to "コメントを追加する", new_question_comment_path(parent), remote: true, class: "btn btn-primary"
+    = link_to "コメントを追加する", new_polymorphic_path([parent, Comment]), remote: true, class: "btn btn-primary"
 
 .modal.fade{id: "comment-modal"}
   .modal-dialog

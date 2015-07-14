@@ -34,9 +34,7 @@ class CommentsController < ApplicationController
   def update
     respond_to do |format|
       if @comment.update(comment_params)
-        format.js {
-          render :create
-        }
+        format.js { render :create }
       else
         format.js { render :edit }
       end
