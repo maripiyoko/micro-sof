@@ -1,9 +1,18 @@
-%div{id: "comment-#{parent.id}"}
+%div
   %label コメント一覧
   .row.col-sm-12
-    %ul{id: "comments"}
-      = render parent.comments
+    %table{id: "comments-#{parent.id}", class: "table table-condensed"}
+      = render parent.comments, { parent: parent }
+
   .row.col-sm-12
-    = link_to "コメントを追加する", new_question_comment_path(parent), remote: true
-  .row.col-sm-12
-    #create-new-comment
+    = link_to "コメントを追加する", new_polymorphic_path([parent, Comment]), remote: true, class: "btn btn-primary"
+
+.modal.fade{id: "comment-modal"}
+  .modal-dialog
+    .modal-content
+      .modal-header
+        %button.close{"area-hidden": true, "data-dismiss": "modal"} ×
+        %h4{class: "modal-title"}コメントを入力してください
+      .modal-body{id: "comment-modal-body"}
+      .modal-footer
+        %button{class: "btn btn-default"}Close

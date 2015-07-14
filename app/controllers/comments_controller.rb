@@ -2,6 +2,7 @@ class CommentsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_parent
   before_action :set_comment, only: [ :edit, :show, :update, :destroy ]
+  before_action :set_comments, only: [ :create, :update, :destroy ]
 
   def new
     @comment = Comment.new
@@ -12,9 +13,10 @@ class CommentsController < ApplicationController
   end
 
   def edit
-  end
-
-  def show
+    respond_to do |format|
+      format.html
+      format.js { render :new }
+    end
   end
 
   def create
@@ -23,9 +25,7 @@ class CommentsController < ApplicationController
     respond_to do |format|
       if @comment.save
         format.html { redirect_to @parent }
-        format.js do
-          @comments = @parent.comments
-        end
+        format.js
       else
         format.js { render :new }
       end
@@ -35,7 +35,7 @@ class CommentsController < ApplicationController
   def update
     respond_to do |format|
       if @comment.update(comment_params)
-        format.js
+        format.js { render :create }
       else
         format.js { render :edit }
       end
@@ -61,8 +61,11 @@ class CommentsController < ApplicationController
     end
 
     def set_comment
-      binding.pry
       @comment = @parent.comments.where(user_id: current_user.id).find(params[:id])
+    end
+
+    def set_comments
+      @comments = @parent.comments
     end
 
     def comment_params
