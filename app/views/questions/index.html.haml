@@ -1,4 +1,8 @@
-%h3 みんなの質問
+.row.col-sm-12
+  .col-sm-10
+    %h4 みんなの質問
+  .col-sm-2
+    = link_to 'New Question', new_question_path, class: "btn btn-primary btn-lg"
 
 %table.table
   %thead
@@ -27,6 +31,4 @@
             = link_to 'Destroy', question, :method => :delete,
               :data => { :confirm => 'Are you sure?' }, class: "btn btn-danger btn-sm"
 
-%br
-
-= link_to 'New Question', new_question_path
+= paginate @questions
