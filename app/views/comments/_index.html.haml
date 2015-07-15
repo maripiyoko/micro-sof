@@ -11,8 +11,8 @@
   .modal-dialog
     .modal-content
       .modal-header
-        %button.close{"area-hidden": true, "data-dismiss": "modal"} ×
+        %button.close{ data: { dismiss: "modal"} } ×
         %h4{class: "modal-title"}コメントを入力してください
       .modal-body{id: "comment-modal-body"}
       .modal-footer
-        %button{class: "btn btn-default"}Close
+        %button.btn.btn-default{ data: { dismiss: "modal"} }Close
