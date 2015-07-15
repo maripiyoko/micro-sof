@@ -21,7 +21,7 @@
         %td
           .media
             .media-left
-              .status
+              .status{class: ("answered" if question.answers.size > 0)}
                 %span.mini-counts{title:"回答数"}=question.answers.size
                 %div.mini-count-label.center 回答
             .media-body
