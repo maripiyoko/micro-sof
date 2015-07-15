@@ -4,7 +4,12 @@ class QuestionsController < ApplicationController
   before_action :set_own_question, only: [:edit, :update, :destroy]
 
   def index
-    @questions = Question.order(updated_at: :desc).page(params[:page])
+    if params[:sort] == "unanswered"
+      questions = Question.unanswered_questions
+    else
+      questions = Question.all
+    end
+    @questions = questions.order(updated_at: :desc).page(params[:page])
   end
 
   def show

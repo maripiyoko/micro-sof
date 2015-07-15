@@ -1,6 +1,10 @@
 .row.col-sm-12
-  .col-sm-10
+  .col-sm-6
     %h4 みんなの質問
+  .col-sm-4.sorting
+    .btn-group
+      = link_to "未回答のみ表示", questions_path(sort: 'unanswered'), {class: "btn btn-default"}
+      = link_to "アクティブ", questions_path, {class: "btn btn-default", title: "最近なにか更新があった順に表示します"}
   .col-sm-2
     = link_to 'New Question', new_question_path, class: "btn btn-primary btn-lg"
 
