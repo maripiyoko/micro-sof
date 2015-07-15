@@ -61,3 +61,5 @@ group :development, :test do
   gem 'erb2haml'
 end
 
+
+gem 'rails_12factor', group: :production
