@@ -4,7 +4,12 @@ class QuestionsController < ApplicationController
   before_action :set_own_question, only: [:edit, :update, :destroy]
 
   def index
-    @questions = Question.all
+    if params[:sort] == "unanswered"
+      questions = Question.unanswered_questions
+    else
+      questions = Question.all
+    end
+    @questions = questions.order(updated_at: :desc).page(params[:page])
   end
 
   def show
@@ -25,7 +30,7 @@ class QuestionsController < ApplicationController
 
     respond_to do |format|
       if @question.save
-        format.html { redirect_to @question, notice: 'Question was successfully created.' }
+        format.html { redirect_to @question, notice: '新しい質問が投稿されました。' }
         format.json { render :show, status: :created, location: @question }
       else
         format.html { render :new }
@@ -37,7 +42,7 @@ class QuestionsController < ApplicationController
   def update
     respond_to do |format|
       if @question.update(question_params)
-        format.html { redirect_to @question, notice: 'Question was successfully updated.' }
+        format.html { redirect_to @question, notice: '質問を更新しました。' }
         format.json { render :show, status: :ok, location: @question }
       else
         format.html { render :edit }
@@ -49,7 +54,7 @@ class QuestionsController < ApplicationController
   def destroy
     @question.destroy
     respond_to do |format|
-      format.html { redirect_to questions_url, notice: 'Question was successfully destroyed.' }
+      format.html { redirect_to questions_url, notice: '質問を削除しました。' }
       format.json { head :no_content }
     end
   end
@@ -64,7 +69,7 @@ class QuestionsController < ApplicationController
       if @question.created_by?(current_user)
         @question = current_user.questions.find(params[:id])
       else
-        redirect_to questions_url, alert: 'Selected question is not editable.'
+        redirect_to questions_url, alert: '他の人の質問は操作できません。'
       end
     end
 

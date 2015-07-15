@@ -1,4 +1,12 @@
-%h3 みんなの質問
+.row.col-sm-12
+  .col-sm-6
+    %h4 みんなの質問
+  .col-sm-4.sorting
+    .btn-group
+      = link_to "未回答のみ表示", questions_path(sort: 'unanswered'),  {class: "btn btn-default #{'active' if params[:sort] == 'unanswered'}"}
+      = link_to "アクティブ", questions_path, {class: "btn btn-default #{'active' unless params[:sort] == 'unanswered'}", title: "最近なにか更新があった順に表示します"}
+  .col-sm-2
+    = link_to 'New Question', new_question_path, class: "btn btn-primary btn-lg"
 
 %table.table
   %thead
@@ -13,12 +21,16 @@
         %td
           .media
             .media-left
-              icon
+              .status{class: ("answered" if question.answers.size > 0)}
+                %span.mini-counts{title:"回答数"}=question.answers.size
+                %div.mini-count-label.center 回答
             .media-body
               .title
                 = link_to "#{question.title}", question
               .body
                 = question.summary
+                .qa-info
+                  = render 'shared/qa_info', { item: question }
         %td
           - if question.created_by?(current_user)
             = link_to 'Edit', edit_question_path(question), class: "btn btn-sm"
@@ -27,6 +39,4 @@
             = link_to 'Destroy', question, :method => :delete,
               :data => { :confirm => 'Are you sure?' }, class: "btn btn-danger btn-sm"
 
-%br
-
-= link_to 'New Question', new_question_path
+= paginate @questions

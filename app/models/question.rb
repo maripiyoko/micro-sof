@@ -33,4 +33,9 @@ class Question < ActiveRecord::Base
     return false unless user
     self.user.id == user.id
   end
+
+  def self.unanswered_questions
+    self.includes(:answers).where(answers: { id: nil })
+  end
+
 end
