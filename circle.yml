@@ -3,10 +3,8 @@ machine:
     version: 2.2.2
   timezone: Asia/Tokyo
 
-test:
-  pre:
-    - bower install
-
 dependencies:
+  pre:
+    - npm install & npm install bower -g
   post:
     - bundle exec rake assets:precompile
