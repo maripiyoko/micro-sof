@@ -1,4 +1,5 @@
-%h3= @question.title
+%h3
+  = link_to @question.title, edit_question_path(@question)
 
 .col-sm-12
   .col-sm-1
