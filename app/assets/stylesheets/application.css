@@ -1,5 +1,6 @@
 /* Paper
  * Bootswatch
+ *= require bootstrap-tagsinput
  *= require_self
  *= require_tree .
 */
