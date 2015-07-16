@@ -4,7 +4,5 @@ machine:
   timezone: Asia/Tokyo
 
 dependencies:
-  pre:
-    - npm install & npm install bower -g
   post:
     - bundle exec rake assets:precompile
