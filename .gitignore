@@ -13,3 +13,6 @@
 !/log/.keep
 /tmp
 .env
+
+# Ignore bower
+/vendor/assets/bower_components/*
