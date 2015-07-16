@@ -3,6 +3,10 @@ machine:
     version: 2.2.2
   timezone: Asia/Tokyo
 
+test:
+  pre:
+    - bower install
+
 dependencies:
   post:
     - bundle exec rake assets:precompile
