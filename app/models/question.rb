@@ -21,6 +21,8 @@ class Question < ActiveRecord::Base
   validates :body, presence: true
   validates :user, presence: true
 
+  acts_as_taggable
+
   BODY_SUMMARY_LENGTH = 50
 
   def summary

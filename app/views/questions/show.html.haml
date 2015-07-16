@@ -15,6 +15,9 @@
   .col-sm-5
     %pre=@question.body
     .row.col-sm-12
+      - @question.tag_list.each do |tag|
+        %span.badge=tag
+    .row.col-sm-12
       = render 'shared/qa_info', { item: @question }
 
 .row.col-sm-12
