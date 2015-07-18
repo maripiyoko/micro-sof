@@ -1,0 +1,7 @@
+%h4 人気タグ
+
+%table.table
+  %tbody
+    - @tags.each do |tag|
+      %tr
+        %td="#{tag.name} (#{tag.taggings_count})"
