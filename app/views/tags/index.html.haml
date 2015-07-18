@@ -1,0 +1,8 @@
+%h4 人気タグ
+
+%table.table
+  %tbody
+    - @tags.each do |tag|
+      %tr
+        %td
+          = link_to "#{tag.name} (#{tag.taggings_count})", tag_path(tag)
