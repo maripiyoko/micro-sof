@@ -1,8 +1,11 @@
 .col-sm-12
   .col-sm-6
     = simple_form_for @question, html: { class: "form-horizontal" } do |f|
-      = f.input :title, input_html: { class: "form-control" }
+      = f.input :title, input_html: { class: "form-control input-lg" }
       = f.input :body, input_html: { class: "form-control", rows: "10" }
       .form-group
         = text_field_tag 'question[tag_list]', @question.tag_list.join(','), { class:"form-control", data: { role: "tagsinput" } }
       = f.button :submit, class: "btn-primary"
+
+  .col-sm-6
+    = render 'shared/markdown_preview', { title: @question.title, text: @question.body }
