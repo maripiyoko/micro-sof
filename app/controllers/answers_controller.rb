@@ -1,9 +1,12 @@
 class AnswersController < ApplicationController
+  include BadgeContributions
+
   before_action :authenticate_user!
   before_action :set_question
   before_action :set_own_question, only: [ :approve ]
   before_action :set_answer, only: [ :update, :destroy ]
-  after_action :grant_badge, only: [ :create ]
+  after_action :grant_teacher_badge, only: [ :create ]
+  after_action :grant_regular_member_badge, only: [:create]
 
   def create
     @answer = @question.answers.build(answer_params)
@@ -58,7 +61,4 @@ class AnswersController < ApplicationController
       params.require(:answer).permit(:body)
     end
 
-    def grant_badge
-      current_user.grant_teacher_badge
-    end
 end
