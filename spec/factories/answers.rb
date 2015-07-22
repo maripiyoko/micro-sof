@@ -18,4 +18,10 @@ FactoryGirl.define do
     association :question
   end
 
+  factory :sequence_answers, class: Answer do
+    body { Faker::Lorem.paragraphs }
+    association :user
+    association :question
+  end
+
 end

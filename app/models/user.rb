@@ -24,4 +24,31 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 
   has_many :questions
+  has_many :badges, -> { uniq }, through: :contributions
+  has_many :contributions
+
+  def has_badge?(badge_id)
+    !self.contributions.find_by_badge_id(badge_id).nil?
+  end
+
+  def grant_student_badge
+    if !has_badge?(Constants::BADGE_STUDENT) && self.questions.any?
+      badge = Badge.find(Constants::BADGE_STUDENT)
+      self.badges << badge
+    end
+  end
+
+  def grant_teacher_badge
+    if !has_badge?(Constants::BADGE_TEACHER) && Answer.where(user_id: self).count > 0
+      badge = Badge.find(Constants::BADGE_TEACHER)
+      self.badges << badge
+    end
+  end
+
+  def grant_regular_member_badge
+    if !has_badge?(Constants::BADGE_REGULAR_MEMBER) && self.questions.count + Answer.where(user_id: self).count > 10
+      badge = Badge.find(Constants::BADGE_REGULAR_MEMBER)
+      self.badges << badge
+    end
+  end
 end

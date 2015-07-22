@@ -24,6 +24,8 @@ gem 'kaminari'
 gem 'acts-as-taggable-on'
 gem 'bower-rails'
 gem 'redcarpet'
+gem 'enumerize'
+gem 'seed-fu'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
@@ -56,12 +58,16 @@ group :development, :test do
   gem 'rspec'
   gem 'rspec-rails'
   gem 'factory_girl_rails'
-  gem 'faker'
   gem 'guard'
   gem 'guard-rspec'
-
-  gem 'erb2haml'
 end
 
+group :test do
+  gem 'faker'
+  gem 'capybara'
+  gem 'database_cleaner'
+  gem 'launchy'
+  gem 'selenium-webdriver'
+end
 
 gem 'rails_12factor', group: :production

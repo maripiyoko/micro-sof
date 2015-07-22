@@ -1,0 +1,5 @@
+module Constants
+  BADGE_STUDENT = 1
+  BADGE_TEACHER = 2
+  BADGE_REGULAR_MEMBER = 101
+end

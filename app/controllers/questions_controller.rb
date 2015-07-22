@@ -1,7 +1,11 @@
 class QuestionsController < ApplicationController
+  include BadgeContributions
+
   before_action :authenticate_user!, except: [:index, :show]
   before_action :set_question, only: [:show, :edit, :update, :destroy]
   before_action :set_own_question, only: [:edit, :update, :destroy]
+  after_action :grant_student_badge, only: [:create]
+  after_action :grant_regular_member_badge, only: [:create]
 
   def index
     if params[:sort] == "unanswered"
@@ -71,4 +75,5 @@ class QuestionsController < ApplicationController
     def question_params
       params.require(:question).permit(:title, :body, :tag_list)
     end
+
 end
