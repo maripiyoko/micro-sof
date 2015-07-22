@@ -32,21 +32,21 @@ class User < ActiveRecord::Base
   end
 
   def grant_student_badge
-    if self.questions.any?
+    if !has_badge?(Constants::BADGE_STUDENT) && self.questions.any?
       badge = Badge.find(Constants::BADGE_STUDENT)
       self.badges << badge
     end
   end
 
   def grant_teacher_badge
-    if self.answers.any?
+    if !has_badge?(Constants::BADGE_TEACHER) && Answer.where(user_id: self).count > 0
       badge = Badge.find(Constants::BADGE_TEACHER)
       self.badges << badge
     end
   end
 
   def grant_regular_member_badge
-    if self.questions.count + self.answers.count > 10
+    if !has_badge?(Constants::BADGE_REGULAR_MEMBER) && self.questions.count + Answer.where(user_id: self).count > 10
       badge = Badge.find(Constants::BADGE_REGULAR_MEMBER)
       self.badges << badge
     end

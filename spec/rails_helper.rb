@@ -52,4 +52,9 @@ RSpec.configure do |config|
 
   # devise
   config.include Devise::TestHelpers, type: :controller
+
+  # seed-fu
+  config.before(:suite) do
+    SeedFu.seed
+  end
 end
