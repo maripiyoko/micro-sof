@@ -44,7 +44,6 @@ RSpec.describe Badge, type: :model do
     expect(badge.errors[:color]).to include("can't be blank")
   end
 
-
   it "nameとcolorがあれば、有効な状態であること" do
     badge = FactoryGirl.create(:badge, name: "First Badge", color: :bronze)
     expect(badge).to be_valid

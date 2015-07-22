@@ -12,4 +12,7 @@
 class Contribution < ActiveRecord::Base
   belongs_to :user
   belongs_to :badge
+
+  validates :user, presence: true
+  validates :badge, presence: true
 end
