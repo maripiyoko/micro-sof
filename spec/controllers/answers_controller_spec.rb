@@ -69,7 +69,7 @@ RSpec.describe AnswersController, type: :controller do
         id: answer.id
       }
       question.reload
-      expect(question.approved_answer).to eq answer
+      expect(question.approved_answer).to eq nil
     end
   end
 
