@@ -10,7 +10,11 @@ Rails.application.routes.draw do
   end
 
   resources :questions, concerns: :voting do
-    resources :answers, concerns: :voting, only: [ :create, :update, :destroy ]
+    resources :answers, concerns: :voting, only: [ :create, :update, :destroy ] do
+      member do
+        patch :approve
+      end
+    end
   end
 
   resources :questions, :answers do
