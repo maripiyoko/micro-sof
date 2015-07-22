@@ -11,10 +11,14 @@
 #
 
 FactoryGirl.define do
+
   factory :badge do
-    name "MyString"
-color "MyString"
-description "MyText"
+    name { FactoryGirl.generate(:badge_names) }
+    color :silver
+    description "Test badge."
   end
 
+  sequence :badge_names do |n|
+    "Badge #{n}"
+  end
 end
