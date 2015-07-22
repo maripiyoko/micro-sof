@@ -60,8 +60,6 @@ group :development, :test do
   gem 'factory_girl_rails'
   gem 'guard'
   gem 'guard-rspec'
-
-  gem 'erb2haml'
 end
 
 group :test do

@@ -88,8 +88,6 @@ GEM
       railties (~> 4.0)
     enumerize (0.11.0)
       activesupport (>= 3.2)
-    erb2haml (0.1.5)
-      html2haml
     erubis (2.7.0)
     excon (0.45.4)
     execjs (2.5.2)
@@ -104,7 +102,7 @@ GEM
     formatador (0.2.5)
     globalid (0.3.5)
       activesupport (>= 4.1.0)
-    guard (2.12.8)
+    guard (2.12.9)
       formatador (>= 0.2.4)
       listen (>= 2.7, <= 4.0)
       lumberjack (~> 1.0)
@@ -332,7 +330,6 @@ DEPENDENCIES
   devise
   dotenv-rails
   enumerize
-  erb2haml
   factory_girl_rails
   faker
   guard
