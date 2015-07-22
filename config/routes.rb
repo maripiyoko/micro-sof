@@ -18,4 +18,6 @@ Rails.application.routes.draw do
   end
 
   resources :tags, only: [ :index, :show ]
+
+  get '/markdown_preview', to: "markdown_preview#preview"
 end
