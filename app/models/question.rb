@@ -14,6 +14,7 @@
 class Question < ActiveRecord::Base
   belongs_to :user
   has_many :answers
+  has_one :approved_answer, class_name: "Answer", foreign_key: "id", primary_key: "approved_answer_id"
   has_many :votes, as: :votable
   has_many :comments, as: :commentable
 
@@ -34,6 +35,15 @@ class Question < ActiveRecord::Base
   def created_by?(user)
     return false unless user
     self.user.id == user.id
+  end
+
+  def has_approved_answer?
+    !self.approved_answer_id.nil?
+  end
+
+  def unapproved_answers
+    id_to_exclude = self.approved_answer_id
+    self.answers.where{id.not_eq id_to_exclude}
   end
 
   def self.unanswered_questions

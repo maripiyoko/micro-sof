@@ -65,11 +65,7 @@ class QuestionsController < ApplicationController
     end
 
     def set_own_question
-      if @question.created_by?(current_user)
-        @question = current_user.questions.find(params[:id])
-      else
-        redirect_to questions_url, alert: '他の人の質問は操作できません。'
-      end
+      set_my_question(params[:id])
     end
 
     def question_params

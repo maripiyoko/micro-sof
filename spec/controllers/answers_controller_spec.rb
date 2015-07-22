@@ -46,6 +46,34 @@ RSpec.describe AnswersController, type: :controller do
     end
   end
 
+  describe "PATCH#approve" do
+    before { sign_in login_user }
+
+    it "質問者であれば、回答を承認できること" do
+      own_question = FactoryGirl.create(:question, user: login_user)
+      answer = FactoryGirl.create(:answer, question: own_question)
+      patch :approve, {
+        question_id: own_question.id,
+        id: answer.id
+      }
+      own_question.reload
+      expect(own_question.approved_answer).to eq answer
+    end
+
+    it "質問者ではない場合、回答を承認できないこと" do
+      other_user = FactoryGirl.create(:user)
+      question = FactoryGirl.create(:question, user: other_user)
+      answer = FactoryGirl.create(:answer, question: question)
+      patch :approve, {
+        question_id: question.id,
+        id: answer.id
+      }
+      question.reload
+      expect(question.approved_answer).to eq nil
+    end
+  end
+
+
   describe "DELETE#destroy" do
     before { sign_in login_user }
 
