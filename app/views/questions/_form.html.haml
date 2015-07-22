@@ -8,4 +8,5 @@
       = f.button :submit, class: "btn-primary"
 
   .col-sm-6
-    = render 'shared/markdown_preview', { title: @question.title, text: @question.body }
+    %h3= @question.title
+    #preview= markdown(@question.body)
