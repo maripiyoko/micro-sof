@@ -24,4 +24,6 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 
   has_many :questions
+  has_many :badges, through: :contributions
+  has_many :contributions
 end
