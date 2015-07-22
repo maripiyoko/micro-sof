@@ -11,6 +11,8 @@
 #
 
 class Badge < ActiveRecord::Base
+  extend Enumerize
+  enumerize :color, in: [ :bronze, :silver, :gold ]
   has_many :users, through: :contributions
   has_many :contributions
 
