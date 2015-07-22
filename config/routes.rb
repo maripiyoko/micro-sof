@@ -13,13 +13,11 @@ Rails.application.routes.draw do
     resources :answers, concerns: :voting, only: [ :create, :update, :destroy ]
   end
 
-  resources :questions do
-    resources :comments, only: [ :new, :edit, :create, :update, :destroy ]
-  end
-
-  resources :answers do
+  resources :questions, :answers do
     resources :comments, only: [ :new, :edit, :create, :update, :destroy ]
   end
 
   resources :tags, only: [ :index, :show ]
+
+  get '/markdown_preview', to: "markdown_preview#preview"
 end

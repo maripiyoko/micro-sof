@@ -27,7 +27,7 @@
                     = link_to '削除', [ @question, answer ], method: :delete,
                       data: { confirm: 'Are you sure?' }, class: "btn btn-sm btn-danger"
               - else
-                = answer.body
+                = markdown(answer.body)
               .row.col-sm-12
                 = render 'shared/qa_info', { item: answer }
               .row.col-sm-12

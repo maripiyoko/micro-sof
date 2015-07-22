@@ -3,3 +3,4 @@
 
 # asset 'bootstrap'
 asset 'bootstrap-tagsinput'
+asset 'jquery-ujs'

@@ -5,7 +5,7 @@
       = render parent.comments, { parent: parent }
 
   .row.col-sm-12
-    = link_to "コメントを追加する", new_polymorphic_path([parent, Comment]), remote: true, class: "btn btn-primary"
+    = link_to "コメントを追加する", new_polymorphic_path([parent, Comment]), remote: true, class: ""
 
 .modal.fade{id: "comment-modal"}
   .modal-dialog
