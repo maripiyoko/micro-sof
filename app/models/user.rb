@@ -26,4 +26,29 @@ class User < ActiveRecord::Base
   has_many :questions
   has_many :badges, -> { uniq }, through: :contributions
   has_many :contributions
+
+  def has_badge?(badge_id)
+    !self.contributions.find_by_badge_id(badge_id).nil?
+  end
+
+  def grant_student_badge
+    if self.questions.any?
+      badge = Badge.find(Constants::BADGE_STUDENT)
+      self.badges << badge
+    end
+  end
+
+  def grant_teacher_badge
+    if self.answers.any?
+      badge = Badge.find(Constants::BADGE_TEACHER)
+      self.badges << badge
+    end
+  end
+
+  def grant_regular_member_badge
+    if self.questions.count + self.answers.count > 10
+      badge = Badge.find(Constants::BADGE_REGULAR_MEMBER)
+      self.badges << badge
+    end
+  end
 end
