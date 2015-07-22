@@ -41,6 +41,11 @@ class Question < ActiveRecord::Base
     !self.approved_answer_id.nil?
   end
 
+  def unapproved_answers
+    id_to_exclude = self.approved_answer_id
+    self.answers.where{id.not_eq id_to_exclude}
+  end
+
   def self.unanswered_questions
     self.includes(:answers).where(answers: { id: nil })
   end

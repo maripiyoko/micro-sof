@@ -30,7 +30,7 @@
       = render 'answers/answer', { answer: @question.approved_answer }
 
 .row.col-sm-12
-  = render 'answers/index'
+  = render 'answers/index', { answers: @question.unapproved_answers }
 .row.col-sm-12
   = render 'answers/new'
 
