@@ -23,6 +23,12 @@
 .row.col-sm-11.col-sm-push-1
   = render 'comments/index', { parent: @question }
 
+- if @question.has_approved_answer?
+  .row.col-sm-12
+    %h4 承認済みの回答
+    .col-sm-11.col-sm-push-1.approved
+      = render 'answers/answer', { answer: @question.approved_answer }
+
 .row.col-sm-12
   = render 'answers/index'
 .row.col-sm-12
