@@ -25,6 +25,7 @@ gem 'acts-as-taggable-on'
 gem 'bower-rails'
 gem 'redcarpet'
 gem 'enumerize'
+gem 'seed-fu'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
