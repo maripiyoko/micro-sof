@@ -4,6 +4,8 @@
 
 ### Rails練習用 StackOverflow コピーアプリ
 
+- [Heroku deployed](https://micro-sof.herokuapp.com/)
+
 #### Ruby version
 - 2.2.2
 
