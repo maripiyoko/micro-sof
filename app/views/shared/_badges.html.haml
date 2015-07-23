@@ -1,0 +1,7 @@
+.panel.panel-default
+  .panel-heading 取得バッジ
+  %ul.list-group
+    - current_user.badges.each do |badge|
+      %li.list-group-item
+        %i{ class: "glyphicon glyphicon-ok-sign badge-#{badge.color}", title: "#{badge.color} badge" }
+        %span=badge.name
