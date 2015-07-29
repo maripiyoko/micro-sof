@@ -1,11 +1,11 @@
 %div
   %label コメント一覧
   .row.col-sm-12
-    %table{id: "comments-#{parent.id}", class: "table table-condensed"}
-      = render parent.comments, { parent: parent }
+    %table{id: "comments-#{question.id}-#{answer.id unless answer.nil?}", class: "table table-condensed"}
+      = render parent.comments, { question: question, answer: answer }
 
   .row.col-sm-12
-    = link_to "コメントを追加する", new_polymorphic_path([parent, Comment]), remote: true, class: ""
+    = link_to "コメントを追加する", comments_path_new(question, answer), remote: true, class: ""
 
 .modal.fade{id: "comment-modal"}
   .modal-dialog

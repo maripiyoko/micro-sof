@@ -24,7 +24,13 @@ class CommentsController < ApplicationController
     @comment.user = current_user
     respond_to do |format|
       if @comment.save
-        format.html { redirect_to @parent }
+        format.html do
+          if @answer.nil?
+            redirect_to @question
+          else
+            redirect_to @answer
+          end
+        end
         format.js
       else
         format.js { render :new }
@@ -53,10 +59,12 @@ class CommentsController < ApplicationController
   private
 
     def set_parent
+      @question = Question.find(params[:question_id])
       if params[:answer_id]
-        @parent= Answer.find(params[:answer_id])
+        @answer= Answer.find(params[:answer_id])
+        @parent = @answer
       else
-        @parent = Question.find(params[:question_id])
+        @parent = @question
       end
     end
 

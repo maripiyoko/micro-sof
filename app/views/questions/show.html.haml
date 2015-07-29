@@ -1,16 +1,7 @@
 .row.col-sm-12
   %h3= link_to @question.title, edit_question_path(@question)
   .col-sm-1
-    -# answers/indexにも同じ様なところがあるパーシャルにしたいが
-    -# パスが違うのでどうしたら良いかわからない
-    .btn-block.js-vote-count
-      = link_to up_question_path(@question), method: :post, remote: true do
-        %i{class: "vote-arrow-style glyphicon glyphicon-chevron-up"}
-    .btn-block.js-vote-score
-      %span{class: "badge "}=@question.sum_votes
-    .btn-block.js-vote-count
-      = link_to down_question_path(@question), method: :delete, remote: true do
-        %i{class: "vote-arrow-style glyphicon glyphicon-chevron-down"}
+    = vote_buttons @question, up_question_path(@question), down_question_path(@question)
   .col-sm-11
     .preview= markdown(@question.body)
   .row.col-sm-10.col-sm-push-1
@@ -21,7 +12,7 @@
       = render 'shared/qa_info', { item: @question }
 
 .row.col-sm-11.col-sm-push-1
-  = render 'comments/index', { parent: @question }
+  = render 'comments/index', { question: @question, answer: nil, parent: @question }
 
 - if @question.has_approved_answer?
   .row.col-sm-12

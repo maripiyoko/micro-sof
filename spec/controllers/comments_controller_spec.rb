@@ -19,7 +19,7 @@ RSpec.describe CommentsController, type: :controller do
     it "回答に投稿すると、コメントが1つ追加されること" do
       comment = FactoryGirl.build(:comment, user: user, commentable: question)
       expect {
-        xhr :post, :create, { answer_id: answer.id, comment: comment.attributes }
+        xhr :post, :create, { question_id: question.id, answer_id: answer.id, comment: comment.attributes }
       }.to change(Comment, :count).by(1)
     end
   end
