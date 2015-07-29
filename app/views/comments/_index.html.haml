@@ -1,7 +1,7 @@
 %div
   %label コメント一覧
   .row.col-sm-12
-    %table{id: "comments-#{parent.id}", class: "table table-condensed"}
+    %table{id: "comments-#{question.id}-#{answer.id unless answer.nil?}", class: "table table-condensed"}
       = render parent.comments, { question: question, answer: answer }
 
   .row.col-sm-12
