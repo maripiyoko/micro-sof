@@ -21,4 +21,4 @@
         .row.col-sm-12
           = render 'shared/qa_info', { item: answer }
         .row.col-sm-12
-          = render 'comments/index', { parent: answer }
+          = render 'comments/index', { question: @question, answer: answer, parent: answer }

@@ -1,9 +1,9 @@
 %tr
   - if comment.created_by?(current_user)
     %td.comment-body
-      = link_to comment.body, edit_polymorphic_path([parent, comment]), remote: true
-    %td.comment-action.text-right
-      = link_to polymorphic_path([parent, comment]), method: :delete, remote: true, data: { confirm: "Are you sure?" } do
+      = link_to comment.body, comments_path_edit(@question, answer, comment), remote: true
+    %td.comment-action.text-righft
+      = link_to comments_path(@question, answer, comment), method: :delete, remote: true, data: { confirm: "Are you sure?" } do
         %i.glyphicon.glyphicon-remove-sign
   - else
     %td.comment-body=comment.body

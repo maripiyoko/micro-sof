@@ -10,15 +10,13 @@ Rails.application.routes.draw do
   end
 
   resources :questions, concerns: :voting do
+    resources :comments, only: [ :new, :edit, :create, :update, :destroy ]
     resources :answers, concerns: :voting, only: [ :create, :update, :destroy ] do
       member do
         patch :approve
       end
+      resources :comments, only: [ :new, :edit, :create, :update, :destroy ]
     end
-  end
-
-  resources :questions, :answers do
-    resources :comments, only: [ :new, :edit, :create, :update, :destroy ]
   end
 
   resources :tags, only: [ :index, :show ]

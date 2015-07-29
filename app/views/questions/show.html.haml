@@ -12,7 +12,7 @@
       = render 'shared/qa_info', { item: @question }
 
 .row.col-sm-11.col-sm-push-1
-  = render 'comments/index', { parent: @question }
+  = render 'comments/index', { question: @question, answer: nil, parent: @question }
 
 - if @question.has_approved_answer?
   .row.col-sm-12

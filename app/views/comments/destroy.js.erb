@@ -1,1 +1,1 @@
-$("#comments-<%= @parent.id %>").html("<%= j(render @comments, { parent: @parent }); %>");
+$("#comments-<%= @parent.id %>").html("<%= j(render @comments, { question: @question, answer: @answer, parent: @parent }); %>");
